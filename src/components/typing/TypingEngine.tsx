@@ -25,6 +25,7 @@ import { useUserHistory } from '../../context/UserHistoryContext';
 import { TypingControls } from './TypingControls';
 import { VirtualKeyboard } from './VirtualKeyboard';
 import { ResultsModal } from './ResultsModal';
+import { trackTestStarted, trackTestCompleted } from '../../utils/analytics';
 
 interface TypingEngineProps {
   passage: Passage;
@@ -140,6 +141,7 @@ export const TypingEngine: React.FC<TypingEngineProps> = ({
     }
 
     addResult(result);
+    trackTestCompleted(result);
   }, [
     elapsedSeconds,
     evaluation.correctCount,
@@ -240,6 +242,7 @@ export const TypingEngine: React.FC<TypingEngineProps> = ({
     if (!hasStarted && val.length > 0) {
       setHasStarted(true);
       setStartTime(Date.now());
+      trackTestStarted(passage.language, mode, duration);
     }
 
     // Strict mode check: prevent typing past an uncorrected error if strictMode is on

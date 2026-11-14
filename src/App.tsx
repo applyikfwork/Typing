@@ -1,6 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Layout } from './components/common/Layout';
+import { Analytics } from '@vercel/analytics/react';
 import { TypingSettingsProvider } from './context/TypingSettingsContext';
 import { UserHistoryProvider } from './context/UserHistoryContext';
 
@@ -66,6 +67,7 @@ export const App: React.FC = () => {
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
+        <Analytics />
       </UserHistoryProvider>
     </TypingSettingsProvider>
   );
