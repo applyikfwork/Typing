@@ -6,6 +6,7 @@ import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { TypingEngine } from '../components/typing/TypingEngine';
 import { ENGLISH_PASSAGES } from '../data/passages/english';
 import { Difficulty } from '../types/typing';
+import { getSoftwareApplicationSchema, getBreadcrumbSchema } from '../utils/seoSchemas';
 
 export const TypingSpeedTestPage: React.FC = () => {
   const [selectedDifficulty, setSelectedDifficulty] = useState<Difficulty>('intermediate');
@@ -17,6 +18,18 @@ export const TypingSpeedTestPage: React.FC = () => {
   const handleNextPassage = () => {
     setPassageIndex((prev) => (prev + 1) % filteredPassages.length);
   };
+
+  const speedSchemas = [
+    getSoftwareApplicationSchema(
+      'TypeBharat Typing Speed Calculator',
+      'Accurate online typing speed test measuring standard WPM, Gross WPM, Net WPM, and precision accuracy.',
+      'https://typebharat.com/typing-speed-test/'
+    ),
+    getBreadcrumbSchema([
+      { name: 'Home', url: 'https://typebharat.com/' },
+      { name: 'Typing Speed Test', url: 'https://typebharat.com/typing-speed-test/' },
+    ]),
+  ];
 
   return (
     <div className="space-y-10">
@@ -30,7 +43,9 @@ export const TypingSpeedTestPage: React.FC = () => {
           'wpm speed test',
           'how fast do i type',
           'online typing speed checker',
+          'calculate wpm accuracy',
         ]}
+        schemaJson={speedSchemas}
       />
 
       <Breadcrumbs items={[{ name: 'Typing Speed Test' }]} />

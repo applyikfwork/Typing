@@ -15,6 +15,7 @@ import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { TypingEngine } from '../components/typing/TypingEngine';
 import { ENGLISH_DRILLS } from '../data/passages/practiceDrills';
 import { Passage } from '../types/typing';
+import { getSoftwareApplicationSchema, getBreadcrumbSchema } from '../utils/seoSchemas';
 
 export const TypingPracticePage: React.FC = () => {
   const categories = [
@@ -42,6 +43,18 @@ export const TypingPracticePage: React.FC = () => {
     setDrillIndex(0);
   };
 
+  const practiceSchemas = [
+    getSoftwareApplicationSchema(
+      'TypeBharat Structured Typing Practice Arena',
+      'Structured step-by-step touch typing drills for Home Row, Top Row, Numbers, and common error mitigation.',
+      'https://typebharat.com/typing-practice/'
+    ),
+    getBreadcrumbSchema([
+      { name: 'Home', url: 'https://typebharat.com/' },
+      { name: 'Typing Practice', url: 'https://typebharat.com/typing-practice/' },
+    ]),
+  ];
+
   return (
     <div className="space-y-10">
       <SEOHead
@@ -54,7 +67,9 @@ export const TypingPracticePage: React.FC = () => {
           'typing practice for beginners',
           'home row typing practice',
           'touch typing practice drills',
+          'keyboard drills typing',
         ]}
+        schemaJson={practiceSchemas}
       />
 
       <Breadcrumbs items={[{ name: 'Typing Practice' }]} />

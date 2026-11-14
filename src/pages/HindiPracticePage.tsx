@@ -6,6 +6,7 @@ import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { TypingEngine } from '../components/typing/TypingEngine';
 import { HINDI_DRILLS } from '../data/passages/hindiDrills';
 import { Passage } from '../types/typing';
+import { getSoftwareApplicationSchema, getBreadcrumbSchema } from '../utils/seoSchemas';
 
 export const HindiPracticePage: React.FC = () => {
   const categories = [
@@ -31,6 +32,18 @@ export const HindiPracticePage: React.FC = () => {
     setDrillIndex(0);
   };
 
+  const hindiPracticeSchemas = [
+    getSoftwareApplicationSchema(
+      'TypeBharat Hindi Typing Practice (हिंदी टाइपिंग अभ्यास)',
+      'क्रमबद्ध हिंदी टाइपिंग अभ्यास: वर्णमाला, मात्राएं, संयुक्ताक्षर, हलंत और प्रशासनिक शब्दावली।',
+      'https://typebharat.com/hindi-typing-practice/'
+    ),
+    getBreadcrumbSchema([
+      { name: 'Home', url: 'https://typebharat.com/' },
+      { name: 'Hindi Typing Practice', url: 'https://typebharat.com/hindi-typing-practice/' },
+    ]),
+  ];
+
   return (
     <div className="space-y-10">
       <SEOHead
@@ -43,7 +56,10 @@ export const HindiPracticePage: React.FC = () => {
           'inscript typing practice',
           'hindi matra practice',
           'hindi varnamala typing',
+          'hindi typing test chart',
         ]}
+        schemaJson={hindiPracticeSchemas}
+        inLanguage="hi"
       />
 
       <Breadcrumbs items={[{ name: 'Hindi Typing Practice' }]} />

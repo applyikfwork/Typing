@@ -7,6 +7,30 @@ import { TypingEngine } from '../components/typing/TypingEngine';
 import { EXAM_CONFIGS } from '../utils/exams';
 import { ExamGuideCard } from '../components/exam/ExamGuideCard';
 import { ENGLISH_PASSAGES } from '../data/passages/english';
+import { 
+  getSoftwareApplicationSchema, 
+  getBreadcrumbSchema, 
+  getFAQSchema 
+} from '../utils/seoSchemas';
+
+const SSC_FAQS = [
+  {
+    question: 'How many key depressions are required in SSC CHSL and SSC CGL?',
+    answer: 'For SSC CHSL (LDC/JSA), the standard is 10,500 Key Depressions Per Hour (KDPH), which equals ~1,750 key depressions in a 10-minute test (~35 WPM). For SSC CGL DEST, the benchmark is 2,000 key depressions in 15 minutes (~27 WPM / 8,000 KDPH).',
+  },
+  {
+    question: 'What is the difference between Full Mistakes and Half Mistakes in SSC typing?',
+    answer: 'Full Mistakes (1 point penalty) include omission of words, substitution of words, or addition of unwritten words. Half Mistakes (0.5 point penalty) include spacing errors, punctuation errors, capitalization mistakes, and letter transpositions.',
+  },
+  {
+    question: 'Is backspace allowed during the SSC computer typing test?',
+    answer: 'Yes, backspace is permitted during the SSC typing test to correct words in the currently typed line. However, candidates cannot use arrow keys or click to edit text lines that have already been submitted.',
+  },
+  {
+    question: 'What is the maximum error percentage permissible in SSC CHSL?',
+    answer: 'The permissible error limit is usually up to 7% for Unreserved (General) category candidates and up to 10% for Reserved category candidates (SC, ST, OBC, EWS, PwD), as notified in the respective SSC tier recruitment notification.',
+  },
+];
 
 export const SSCExamPage: React.FC = () => {
   const [examSubtype, setExamSubtype] = useState<'ssc-chsl' | 'ssc-cgl'>('ssc-chsl');
@@ -18,6 +42,20 @@ export const SSCExamPage: React.FC = () => {
   const handleNextPassage = () => {
     setPassageIndex((prev) => (prev + 1) % ENGLISH_PASSAGES.length);
   };
+
+  const sscSchemas = [
+    getSoftwareApplicationSchema(
+      'TypeBharat SSC Typing Test Simulator (CHSL & CGL DEST)',
+      'Accurate simulation of SSC CHSL (35 WPM / 10500 KDPH) and SSC CGL DEST typing tests with full and half mistake calculations.',
+      'https://typebharat.com/ssc-typing-test/'
+    ),
+    getBreadcrumbSchema([
+      { name: 'Home', url: 'https://typebharat.com/' },
+      { name: 'Government Exams', url: 'https://typebharat.com/government-typing-test/' },
+      { name: 'SSC Typing Test', url: 'https://typebharat.com/ssc-typing-test/' },
+    ]),
+    getFAQSchema(SSC_FAQS),
+  ];
 
   return (
     <div className="space-y-10">
@@ -31,7 +69,9 @@ export const SSCExamPage: React.FC = () => {
           'ssc cgl dest typing test',
           '10500 kdph typing test',
           'ssc typing test online practice',
+          'ssc typing mistake calculation formula',
         ]}
+        schemaJson={sscSchemas}
       />
 
       <Breadcrumbs items={[
@@ -129,6 +169,31 @@ export const SSCExamPage: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* SSC Frequently Asked Questions (Matches FAQPage Schema) */}
+      <section className="p-6 sm:p-8 bg-surface rounded-3xl border border-border-subtle shadow-card space-y-6">
+        <div>
+          <h2 className="text-xl sm:text-2xl font-bold text-ink-heading">
+            Frequently Asked Questions: SSC CHSL &amp; CGL Skill Test
+          </h2>
+          <p className="text-xs sm:text-sm text-ink-muted mt-1">
+            Verified information regarding key depression standards, error formulas, and time allowances.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {SSC_FAQS.map((faq, idx) => (
+            <div key={idx} className="p-4 rounded-2xl bg-soft-gray/60 space-y-2">
+              <h3 className="font-bold text-sm text-ink-heading">
+                {faq.question}
+              </h3>
+              <p className="text-xs sm:text-sm text-ink-body leading-relaxed">
+                {faq.answer}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 };

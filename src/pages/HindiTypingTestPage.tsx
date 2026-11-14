@@ -6,6 +6,30 @@ import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { TypingEngine } from '../components/typing/TypingEngine';
 import { HINDI_PASSAGES } from '../data/passages/hindi';
 import { Difficulty } from '../types/typing';
+import { 
+  getSoftwareApplicationSchema, 
+  getBreadcrumbSchema, 
+  getFAQSchema 
+} from '../utils/seoSchemas';
+
+const HINDI_TEST_FAQS = [
+  {
+    question: 'हिंदी टाइपिंग के लिए कौन सा लेआउट बेहतर है: Inscript या Remington Gail?',
+    answer: 'Inscript भारत सरकार द्वारा मानकीकृत आधिकारिक लेआउट है जो सभी ऑपरेटिंग सिस्टम (Windows, Mac, Android) में बिना किसी अतिरिक्त सॉफ्टवेयर के पहले से उपलब्ध होता है। Remington Gail पारंपरिक टाइपराइटर लेआउट पर आधारित है। यदि आप नए सिरे से टाइपिंग सीख रहे हैं, तो Inscript सीखना अधिक सरल और वैज्ञानिक है।',
+  },
+  {
+    question: 'Windows 10 / 11 में Hindi Inscript कीबोर्ड कैसे चालू करें?',
+    answer: 'Settings खोलें -> Time & Language -> Language & Region -> Add a language -> Hindi चुनें -> Options में जाकर Keyboard में "Hindi Inscript" जोड़ें। इसके बाद Alt + Shift दबाकर सीधे हिंदी टाइपिंग शुरू करें।',
+  },
+  {
+    question: 'Inscript में संयुक्ताक्षर (आधा अक्षर) कैसे बनाएं?',
+    answer: 'किसी भी अक्षर के बाद हलंत (D की) दबाने से वह आधा अक्षर बन जाता है। जैसे: क + ् + ष = क्ष, त + ् + र = त्र, ज + ् + ञ = ज्ञ।',
+  },
+  {
+    question: 'MP CPCT में हिंदी टाइपिंग का न्यूनतम क्वालीफाइंग स्कोर क्या है?',
+    answer: 'MP CPCT में हिंदी टाइपिंग के लिए न्यूनतम 20 शुद्ध शब्द प्रति मिनट (Net WPM) आवश्यक है, जिससे 50% अंक प्राप्त होते हैं। 40+ WPM पर अधिकतम 90% अंक दिए जाते हैं।',
+  },
+];
 
 export const HindiTypingTestPage: React.FC = () => {
   const [selectedDifficulty, setSelectedDifficulty] = useState<Difficulty>('intermediate');
@@ -20,14 +44,18 @@ export const HindiTypingTestPage: React.FC = () => {
     setPassageIndex((prev) => (prev + 1) % filteredPassages.length);
   };
 
-  const schemaJson = {
-    '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
-    'name': 'TypeBharat Hindi Typing Test',
-    'applicationCategory': 'EducationalApplication',
-    'operatingSystem': 'Any',
-    'description': 'Online Hindi Unicode typing test for Inscript and Remington Gail layouts. Free speed test for CPCT and government typing exams.',
-  };
+  const hindiSchemas = [
+    getSoftwareApplicationSchema(
+      'TypeBharat Hindi Typing Test (हिंदी टाइपिंग टेस्ट)',
+      'मुफ्त ऑनलाइन हिंदी यूनिकोड टाइपिंग टेस्ट। Inscript और Remington Gail लेआउट पर वास्तविक समय गति और सटीकता मापें।',
+      'https://typebharat.com/hindi-typing-test/'
+    ),
+    getBreadcrumbSchema([
+      { name: 'Home', url: 'https://typebharat.com/' },
+      { name: 'Hindi Typing Test', url: 'https://typebharat.com/hindi-typing-test/' },
+    ]),
+    getFAQSchema(HINDI_TEST_FAQS),
+  ];
 
   return (
     <div className="space-y-10">
@@ -41,8 +69,11 @@ export const HindiTypingTestPage: React.FC = () => {
           'hindi unicode typing',
           'cpct hindi typing test',
           'hindi typing practice inscript',
+          'hindi remington gail test',
+          'online devanagari typing test',
         ]}
-        schemaJson={schemaJson}
+        schemaJson={hindiSchemas}
+        inLanguage="hi"
       />
 
       <Breadcrumbs items={[{ name: 'Hindi Typing Test' }]} />
@@ -185,6 +216,31 @@ export const HindiTypingTestPage: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Hindi FAQ Section (Matches FAQPage Schema) */}
+      <section className="p-6 sm:p-8 bg-surface rounded-3xl border border-border-subtle shadow-card space-y-6 font-hindi">
+        <div>
+          <h2 className="text-xl sm:text-2xl font-bold text-ink-heading">
+            अक्सर पूछे जाने वाले प्रश्न (Hindi Typing FAQs)
+          </h2>
+          <p className="text-xs sm:text-sm text-ink-muted mt-1">
+            हिंदी टाइपिंग, यूनिकोड इनपुट और सरकारी परीक्षाओं से संबंधित महत्वपूर्ण उत्तर।
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {HINDI_TEST_FAQS.map((faq, idx) => (
+            <div key={idx} className="p-4 rounded-2xl bg-soft-gray/60 space-y-2">
+              <h3 className="font-bold text-sm text-ink-heading">
+                {faq.question}
+              </h3>
+              <p className="text-xs sm:text-sm text-ink-body leading-relaxed">
+                {faq.answer}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 };

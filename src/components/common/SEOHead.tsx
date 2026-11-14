@@ -9,13 +9,16 @@ export const SEOHead: React.FC<SEOProps> = ({
   ogType = 'website',
   ogImage = 'https://typebharat.com/og-banner.png',
   schemaJson,
+  inLanguage = 'en',
+  hreflangAlternates,
+  author = 'TypeBharat Team',
 }) => {
   useEffect(() => {
-    // 1. Update document title
-    const fullTitle = `${title} | TypeBharat`;
+    // 1. Title
+    const fullTitle = title.includes('TypeBharat') ? title : `${title} | TypeBharat`;
     document.title = fullTitle;
 
-    // Helper to update or create meta tags
+    // Helper to set or create meta elements
     const setMeta = (nameOrProperty: string, value: string, isProperty = false) => {
       const selector = isProperty
         ? `meta[property="${nameOrProperty}"]`
@@ -33,23 +36,33 @@ export const SEOHead: React.FC<SEOProps> = ({
       element.setAttribute('content', value);
     };
 
-    // 2. Primary Meta
+    // 2. Primary Meta Tags
     setMeta('description', description);
     if (keywords && keywords.length > 0) {
       setMeta('keywords', keywords.join(', '));
     }
+    setMeta('author', author);
+    setMeta('robots', 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1');
+    setMeta('theme-color', '#159E8C');
 
     // 3. Open Graph
     setMeta('og:title', fullTitle, true);
     setMeta('og:description', description, true);
     setMeta('og:type', ogType, true);
+    setMeta('og:site_name', 'TypeBharat', true);
+    setMeta('og:locale', inLanguage === 'hi' ? 'hi_IN' : 'en_IN', true);
     setMeta('og:image', ogImage, true);
+    setMeta('og:image:width', '1200', true);
+    setMeta('og:image:height', '630', true);
+    setMeta('og:image:alt', `${title} - TypeBharat`, true);
     if (canonical) {
       setMeta('og:url', canonical, true);
     }
 
     // 4. Twitter Card
     setMeta('twitter:card', 'summary_large_image');
+    setMeta('twitter:site', '@TypeBharat');
+    setMeta('twitter:creator', '@TypeBharat');
     setMeta('twitter:title', fullTitle);
     setMeta('twitter:description', description);
     setMeta('twitter:image', ogImage);
@@ -65,21 +78,51 @@ export const SEOHead: React.FC<SEOProps> = ({
       linkCanonical.setAttribute('href', canonical);
     }
 
-    // 6. JSON-LD Structured Data
+    // 6. Hreflang Alternates
+    // Remove existing hreflang alternates before inserting current
+    document.querySelectorAll('link[rel="alternate"][hreflang]').forEach((el) => el.remove());
+
+    const alternates = hreflangAlternates || [
+      { lang: 'en', url: 'https://typebharat.com/english-typing-test/' },
+      { lang: 'hi', url: 'https://typebharat.com/hindi-typing-test/' },
+      { lang: 'x-default', url: 'https://typebharat.com/' },
+    ];
+
+    alternates.forEach(({ lang, url }) => {
+      const link = document.createElement('link');
+      link.setAttribute('rel', 'alternate');
+      link.setAttribute('hreflang', lang);
+      link.setAttribute('href', url);
+      document.head.appendChild(link);
+    });
+
+    // 7. Structured Data (JSON-LD)
     if (schemaJson) {
-      const scriptId = 'schema-ld-json';
-      let script = document.getElementById(scriptId) as HTMLScriptElement | null;
-      if (!script) {
-        script = document.createElement('script');
-        script.id = scriptId;
-        script.type = 'application/ld+json';
-        document.head.appendChild(script);
-      }
-      script.textContent = JSON.stringify(schemaJson);
+      // Remove any old schema element
+      const existingScript = document.getElementById('schema-ld-json');
+      if (existingScript) existingScript.remove();
+
+      const script = document.createElement('script');
+      script.id = 'schema-ld-json';
+      script.type = 'application/ld+json';
+      const payload = Array.isArray(schemaJson) ? schemaJson : [schemaJson];
+      script.textContent = JSON.stringify(payload.length === 1 ? payload[0] : payload);
+      document.head.appendChild(script);
     }
 
     window.scrollTo({ top: 0, behavior: 'instant' });
-  }, [title, description, canonical, keywords, ogType, ogImage, schemaJson]);
+  }, [
+    title,
+    description,
+    canonical,
+    keywords,
+    ogType,
+    ogImage,
+    schemaJson,
+    inLanguage,
+    hreflangAlternates,
+    author,
+  ]);
 
   return null;
 };

@@ -23,6 +23,12 @@ import { HINDI_PASSAGES } from '../data/passages/hindi';
 import { EXAM_CONFIGS } from '../utils/exams';
 import { FREQUENTLY_ASKED_QUESTIONS } from '../data/faqs';
 import { TYPING_LESSONS } from '../data/lessons';
+import { 
+  getOrganizationSchema, 
+  getWebSiteSchema, 
+  getSoftwareApplicationSchema, 
+  getFAQSchema 
+} from '../utils/seoSchemas';
 
 export const HomePage: React.FC = () => {
   const [activeLang, setActiveLang] = useState<'english' | 'hindi'>('english');
@@ -35,18 +41,16 @@ export const HomePage: React.FC = () => {
     setPassageIndex((prev) => (prev + 1) % activePassages.length);
   };
 
-  const schemaJson = {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    'name': 'TypeBharat',
-    'url': 'https://typebharat.com/',
-    'description': 'Premier online typing practice, speed test, and government exam preparation platform for English and Hindi Unicode.',
-    'potentialAction': {
-      '@type': 'SearchAction',
-      'target': 'https://typebharat.com/typing-practice/?q={search_term_string}',
-      'query-input': 'required name=search_term_string',
-    },
-  };
+  const homeSchemas = [
+    getOrganizationSchema(),
+    getWebSiteSchema(),
+    getSoftwareApplicationSchema(
+      'TypeBharat Typing Speed Test',
+      'Free online English & Hindi typing speed test with real-time WPM calculation, accuracy tracking, and government exam simulators.',
+      'https://typebharat.com/'
+    ),
+    getFAQSchema(FREQUENTLY_ASKED_QUESTIONS.slice(0, 6)),
+  ];
 
   return (
     <div className="space-y-16 lg:space-y-24">
@@ -62,8 +66,10 @@ export const HomePage: React.FC = () => {
           'ssc typing practice',
           'free typing test',
           'wpm test',
+          'typing test hindi and english',
+          'typing practice online free',
         ]}
-        schemaJson={schemaJson}
+        schemaJson={homeSchemas}
       />
 
       {/* Hero Section with Immediate Working Typing Arena */}
@@ -140,6 +146,66 @@ export const HomePage: React.FC = () => {
             mode="timed"
             onNextPassage={handleNextPassage}
           />
+        </div>
+
+        {/* Google Featured Snippet (Position Zero) & Direct Answer Box */}
+        <div className="w-full max-w-4xl mx-auto p-6 sm:p-7 rounded-3xl bg-surface border border-border-subtle shadow-card space-y-4">
+          <div className="flex items-center gap-2 text-xs font-bold text-brand-darkTeal uppercase tracking-wider">
+            <Sparkles className="w-4 h-4 text-brand-teal" />
+            <span>Quick Fact &bull; Google Position Zero Summary</span>
+          </div>
+          <h2 className="text-xl sm:text-2xl font-bold text-ink-heading">
+            What is a Good Typing Speed (WPM) for Students &amp; Competitive Exams?
+          </h2>
+          <p className="text-sm sm:text-base text-ink-body leading-relaxed">
+            The average international typing speed is <strong>40 Words Per Minute (WPM)</strong> with 92% accuracy. For Indian clerical and government competitive examinations, minimum qualifying benchmarks are typically <strong>35 WPM in English (10,500 KDPH for SSC CHSL)</strong> and <strong>20 to 30 WPM in Hindi Unicode (MAP_IT CPCT &amp; State Courts)</strong>. Professional typists, programmers, and stenographers operate at <strong>65 to 80+ WPM</strong>.
+          </p>
+
+          {/* WPM Speed Matrix Table */}
+          <div className="overflow-x-auto pt-2">
+            <table className="w-full text-left text-xs sm:text-sm">
+              <thead className="bg-soft-gray/70 text-ink-heading font-semibold border-b border-border-subtle">
+                <tr>
+                  <th className="py-2.5 px-3">Typing Tier</th>
+                  <th className="py-2.5 px-3">Speed (WPM)</th>
+                  <th className="py-2.5 px-3">Key Depressions (KDPH)</th>
+                  <th className="py-2.5 px-3">Relevance &amp; Exam Target</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-border-subtle text-ink-body">
+                <tr>
+                  <td className="py-2.5 px-3 font-semibold text-ink-heading">Beginner / Novice</td>
+                  <td className="py-2.5 px-3 font-mono font-bold text-amber-700">15 – 25 WPM</td>
+                  <td className="py-2.5 px-3 font-mono">4,500 – 7,500</td>
+                  <td className="py-2.5 px-3">Hunt-and-peck typists learning finger placement</td>
+                </tr>
+                <tr>
+                  <td className="py-2.5 px-3 font-semibold text-ink-heading">Intermediate / Average</td>
+                  <td className="py-2.5 px-3 font-mono font-bold text-blue-700">30 – 40 WPM</td>
+                  <td className="py-2.5 px-3 font-mono">9,000 – 12,000</td>
+                  <td className="py-2.5 px-3">Clears MP CPCT (30 English / 20 Hindi) and RRB NTPC</td>
+                </tr>
+                <tr className="bg-brand-lightTeal/30">
+                  <td className="py-2.5 px-3 font-bold text-brand-darkTeal">Govt Exam Qualifier</td>
+                  <td className="py-2.5 px-3 font-mono font-extrabold text-brand-darkTeal">35 – 45 WPM</td>
+                  <td className="py-2.5 px-3 font-mono font-bold text-brand-darkTeal">10,500 – 13,500</td>
+                  <td className="py-2.5 px-3 font-semibold text-brand-darkTeal">Qualifies for SSC CHSL LDC/JSA and High Court typists</td>
+                </tr>
+                <tr>
+                  <td className="py-2.5 px-3 font-semibold text-ink-heading">Advanced Typist</td>
+                  <td className="py-2.5 px-3 font-mono font-bold text-emerald-700">50 – 65 WPM</td>
+                  <td className="py-2.5 px-3 font-mono">15,000 – 19,500</td>
+                  <td className="py-2.5 px-3">High-speed office data entry and administrative excellence</td>
+                </tr>
+                <tr>
+                  <td className="py-2.5 px-3 font-semibold text-ink-heading">Pro Master Typist</td>
+                  <td className="py-2.5 px-3 font-mono font-bold text-purple-700">70+ WPM</td>
+                  <td className="py-2.5 px-3 font-mono">21,000+</td>
+                  <td className="py-2.5 px-3">Top 3% percentile touch typists, court stenographers</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
 

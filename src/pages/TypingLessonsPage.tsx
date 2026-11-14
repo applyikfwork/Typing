@@ -4,6 +4,7 @@ import { BookOpen, Clock, CheckCircle2, Lightbulb, ArrowRight, Bookmark } from '
 import { SEOHead } from '../components/common/SEOHead';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { TYPING_LESSONS, LessonItem } from '../data/lessons';
+import { getBreadcrumbSchema, getHowToSchema } from '../utils/seoSchemas';
 
 export const TypingLessonsPage: React.FC = () => {
   const location = useLocation();
@@ -22,6 +23,22 @@ export const TypingLessonsPage: React.FC = () => {
 
   const activeLesson = TYPING_LESSONS.find((l) => l.id === selectedLessonId) || TYPING_LESSONS[0];
 
+  const lessonSchemas = [
+    getBreadcrumbSchema([
+      { name: 'Home', url: 'https://typebharat.com/' },
+      { name: 'Typing Lessons', url: 'https://typebharat.com/typing-lessons/' },
+      { name: activeLesson.title, url: `https://typebharat.com/typing-lessons/#${activeLesson.slug}` },
+    ]),
+    getHowToSchema(
+      activeLesson.title,
+      activeLesson.summary,
+      activeLesson.content.sections.map((sec) => ({
+        name: sec.heading,
+        text: sec.body.join(' '),
+      }))
+    ),
+  ];
+
   return (
     <div className="space-y-10">
       <SEOHead
@@ -35,6 +52,7 @@ export const TypingLessonsPage: React.FC = () => {
           'typing posture ergonomic',
           'touch typing guide for beginners',
         ]}
+        schemaJson={lessonSchemas}
       />
 
       <Breadcrumbs items={[{ name: 'Typing Lessons & Tutorials' }]} />

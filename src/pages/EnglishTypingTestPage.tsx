@@ -6,6 +6,30 @@ import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { TypingEngine } from '../components/typing/TypingEngine';
 import { ENGLISH_PASSAGES } from '../data/passages/english';
 import { Difficulty } from '../types/typing';
+import { 
+  getSoftwareApplicationSchema, 
+  getBreadcrumbSchema, 
+  getFAQSchema 
+} from '../utils/seoSchemas';
+
+const ENGLISH_TEST_FAQS = [
+  {
+    question: 'How is Words Per Minute (WPM) calculated in this English typing test?',
+    answer: 'Speed is calculated using the international standard 5-character word formula: Standard WPM = (Total Correct Characters / 5) / Time in Minutes. Spaces and punctuation marks are counted as valid keystrokes.',
+  },
+  {
+    question: 'Should I practice using a 1-minute test or a 5-minute test?',
+    answer: 'Use the 1-minute test for quick finger warm-ups, rhythm calibration, and testing keyboard tactile response. Use the 3-minute, 5-minute, and 10-minute tests for building sustained mental concentration and muscle stamina required for competitive exams.',
+  },
+  {
+    question: 'What is the difference between Gross WPM and Net WPM?',
+    answer: 'Gross WPM reflects raw typing speed: (Total Keystrokes / 5) / Minutes. Net WPM deducts an error penalty: Gross WPM - (Uncorrected Errors / Minutes). Recruitment commissions evaluate qualifying marks using Net WPM.',
+  },
+  {
+    question: 'What typing speed is required for SSC CHSL and clerical jobs?',
+    answer: 'SSC CHSL requires 35 WPM in English (equivalent to 10,500 key depressions per hour) in a 10-minute test. Most corporate data entry and administrative positions require 40 to 50 WPM with at least 95% accuracy.',
+  },
+];
 
 export const EnglishTypingTestPage: React.FC = () => {
   const [selectedDifficulty, setSelectedDifficulty] = useState<Difficulty>('intermediate');
@@ -20,19 +44,18 @@ export const EnglishTypingTestPage: React.FC = () => {
     setPassageIndex((prev) => (prev + 1) % filteredPassages.length);
   };
 
-  const schemaJson = {
-    '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
-    'name': 'TypeBharat English Typing Test',
-    'applicationCategory': 'EducationalApplication',
-    'operatingSystem': 'Any',
-    'offers': {
-      '@type': 'Offer',
-      'price': '0',
-      'priceCurrency': 'INR',
-    },
-    'description': 'Free online English typing test with live WPM calculation, accuracy tracking, and 1, 3, 5, and 10 minute timed options.',
-  };
+  const englishSchemas = [
+    getSoftwareApplicationSchema(
+      'TypeBharat English Typing Test',
+      'Free online English typing test with live WPM calculation, accuracy tracking, and 1, 3, 5, and 10 minute timed options.',
+      'https://typebharat.com/english-typing-test/'
+    ),
+    getBreadcrumbSchema([
+      { name: 'Home', url: 'https://typebharat.com/' },
+      { name: 'English Typing Test', url: 'https://typebharat.com/english-typing-test/' },
+    ]),
+    getFAQSchema(ENGLISH_TEST_FAQS),
+  ];
 
   return (
     <div className="space-y-10">
@@ -46,8 +69,9 @@ export const EnglishTypingTestPage: React.FC = () => {
           '5 minute typing test english',
           'online english typing practice',
           'wpm typing speed test',
+          'free english typing test with accuracy',
         ]}
-        schemaJson={schemaJson}
+        schemaJson={englishSchemas}
       />
 
       <Breadcrumbs items={[{ name: 'English Typing Test' }]} />
@@ -198,6 +222,31 @@ export const EnglishTypingTestPage: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Frequently Asked Questions Section (Matches FAQPage Schema) */}
+      <section className="p-6 sm:p-8 bg-surface rounded-3xl border border-border-subtle shadow-card space-y-6">
+        <div>
+          <h2 className="text-xl sm:text-2xl font-bold text-ink-heading">
+            Frequently Asked Questions: English Typing Speed &amp; Accuracy
+          </h2>
+          <p className="text-xs sm:text-sm text-ink-muted mt-1">
+            Common questions regarding words per minute measurement, test durations, and government benchmarks.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {ENGLISH_TEST_FAQS.map((faq, idx) => (
+            <div key={idx} className="p-4 rounded-2xl bg-soft-gray/60 space-y-2">
+              <h3 className="font-bold text-sm text-ink-heading">
+                {faq.question}
+              </h3>
+              <p className="text-xs sm:text-sm text-ink-body leading-relaxed">
+                {faq.answer}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 };

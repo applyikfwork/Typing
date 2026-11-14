@@ -5,6 +5,7 @@ import { SEOHead } from '../components/common/SEOHead';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { TypingEngine } from '../components/typing/TypingEngine';
 import { ENGLISH_PASSAGES } from '../data/passages/english';
+import { getSoftwareApplicationSchema, getBreadcrumbSchema } from '../utils/seoSchemas';
 
 export const FreeTypingTestPage: React.FC = () => {
   const [passageIndex, setPassageIndex] = useState(2);
@@ -13,6 +14,18 @@ export const FreeTypingTestPage: React.FC = () => {
   const handleNextPassage = () => {
     setPassageIndex((prev) => (prev + 1) % ENGLISH_PASSAGES.length);
   };
+
+  const freeSchemas = [
+    getSoftwareApplicationSchema(
+      'TypeBharat Free Typing Test Online',
+      'Free online typing test with instant WPM results, zero registration required, and 100% client-side privacy.',
+      'https://typebharat.com/free-typing-test/'
+    ),
+    getBreadcrumbSchema([
+      { name: 'Home', url: 'https://typebharat.com/' },
+      { name: 'Free Typing Test', url: 'https://typebharat.com/free-typing-test/' },
+    ]),
+  ];
 
   return (
     <div className="space-y-10">
@@ -26,7 +39,9 @@ export const FreeTypingTestPage: React.FC = () => {
           'check typing speed free',
           'no sign up typing test',
           'online typing speed test free',
+          'typing test without login',
         ]}
+        schemaJson={freeSchemas}
       />
 
       <Breadcrumbs items={[{ name: 'Free Typing Test' }]} />

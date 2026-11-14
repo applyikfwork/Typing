@@ -8,6 +8,30 @@ import { EXAM_CONFIGS } from '../utils/exams';
 import { ExamGuideCard } from '../components/exam/ExamGuideCard';
 import { ENGLISH_PASSAGES } from '../data/passages/english';
 import { HINDI_PASSAGES } from '../data/passages/hindi';
+import { 
+  getSoftwareApplicationSchema, 
+  getBreadcrumbSchema, 
+  getFAQSchema 
+} from '../utils/seoSchemas';
+
+const CPCT_FAQS = [
+  {
+    question: 'Is backspace allowed in the actual MP CPCT typing examination?',
+    answer: 'Yes, backspace is permitted to correct errors in the currently typed active word before you press spacebar to move forward.',
+  },
+  {
+    question: 'Can candidates attempt both English and Hindi typing in CPCT?',
+    answer: 'Yes, the MP CPCT examination includes both English typing (15 minutes) and Hindi typing (15 minutes) following the computer theory section. You can clear either one or both based on your job requirement.',
+  },
+  {
+    question: 'What is the validity period of the MP CPCT scorecard?',
+    answer: 'As per the Madhya Pradesh state government notification, the CPCT scorecard is valid for 7 years from the date of the examination.',
+  },
+  {
+    question: 'What are the qualifying marks for CPCT typing?',
+    answer: 'The minimum qualifying cutoff is 30 Net WPM for English typing (awards 50% score) and 20 Net WPM for Hindi typing (awards 50% score). Higher speeds unlock higher score slabs up to 90% at 71+ WPM English and 41+ WPM Hindi.',
+  },
+];
 
 export const CPCTExamPage: React.FC = () => {
   const [activeLang, setActiveLang] = useState<'english' | 'hindi'>('english');
@@ -20,6 +44,20 @@ export const CPCTExamPage: React.FC = () => {
   const handleNextPassage = () => {
     setPassageIndex((prev) => (prev + 1) % passages.length);
   };
+
+  const cpctSchemas = [
+    getSoftwareApplicationSchema(
+      'TypeBharat MP CPCT Typing Test Simulator',
+      'Realistic 15-minute MP CPCT typing test simulator for English (30 WPM) and Hindi (20 WPM) with official percentile scorecard slabs.',
+      'https://typebharat.com/cpct-typing-test/'
+    ),
+    getBreadcrumbSchema([
+      { name: 'Home', url: 'https://typebharat.com/' },
+      { name: 'Government Exams', url: 'https://typebharat.com/government-typing-test/' },
+      { name: 'MP CPCT Typing Test', url: 'https://typebharat.com/cpct-typing-test/' },
+    ]),
+    getFAQSchema(CPCT_FAQS),
+  ];
 
   return (
     <div className="space-y-10">
@@ -34,7 +72,9 @@ export const CPCTExamPage: React.FC = () => {
           'mp cpct typing speed test',
           'cpct remington gail typing',
           'cpct inscript practice',
+          'map it cpct qualifying speed',
         ]}
+        schemaJson={cpctSchemas}
       />
 
       <Breadcrumbs items={[
@@ -170,6 +210,31 @@ export const CPCTExamPage: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* MP CPCT Frequently Asked Questions (Matches FAQPage Schema) */}
+      <section className="p-6 sm:p-8 bg-surface rounded-3xl border border-border-subtle shadow-card space-y-6">
+        <div>
+          <h2 className="text-xl sm:text-2xl font-bold text-ink-heading">
+            Frequently Asked Questions: MP CPCT Typing Examination
+          </h2>
+          <p className="text-xs sm:text-sm text-ink-muted mt-1">
+            Official guidelines, scoring percentiles, and preparation tips for MP IT certification.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {CPCT_FAQS.map((faq, idx) => (
+            <div key={idx} className="p-4 rounded-2xl bg-soft-gray/60 space-y-2">
+              <h3 className="font-bold text-sm text-ink-heading">
+                {faq.question}
+              </h3>
+              <p className="text-xs sm:text-sm text-ink-body leading-relaxed">
+                {faq.answer}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 };

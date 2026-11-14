@@ -18,9 +18,17 @@ import { RecentTestsTable } from '../components/progress/RecentTestsTable';
 import { StreakTracker } from '../components/progress/StreakTracker';
 import { WeakKeyAnalysis } from '../components/typing/WeakKeyAnalysis';
 import { useUserHistory } from '../context/UserHistoryContext';
+import { getBreadcrumbSchema } from '../utils/seoSchemas';
 
 export const MyProgressPage: React.FC = () => {
   const { stats, resetAllHistory } = useUserHistory();
+
+  const progressSchemas = [
+    getBreadcrumbSchema([
+      { name: 'Home', url: 'https://typebharat.com/' },
+      { name: 'My Performance Progress', url: 'https://typebharat.com/my-progress/' },
+    ]),
+  ];
 
   return (
     <div className="space-y-10">
@@ -35,6 +43,7 @@ export const MyProgressPage: React.FC = () => {
           'weak keys diagnostic',
           'typing test history',
         ]}
+        schemaJson={progressSchemas}
       />
 
       <Breadcrumbs items={[{ name: 'My Performance Progress' }]} />

@@ -3,6 +3,7 @@ import { HelpCircle, ChevronDown, ChevronUp, Search, ArrowRight } from 'lucide-r
 import { SEOHead } from '../components/common/SEOHead';
 import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { FREQUENTLY_ASKED_QUESTIONS, FAQItem } from '../data/faqs';
+import { getBreadcrumbSchema, getFAQSchema } from '../utils/seoSchemas';
 
 export const FAQPage: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<string>('all');
@@ -25,18 +26,13 @@ export const FAQPage: React.FC = () => {
     return matchesCat && matchesSearch;
   });
 
-  const schemaJson = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    'mainEntity': FREQUENTLY_ASKED_QUESTIONS.map((item) => ({
-      '@type': 'Question',
-      'name': item.question,
-      'acceptedAnswer': {
-        '@type': 'Answer',
-        'text': item.answer,
-      },
-    })),
-  };
+  const faqSchemas = [
+    getBreadcrumbSchema([
+      { name: 'Home', url: 'https://typebharat.com/' },
+      { name: 'Frequently Asked Questions', url: 'https://typebharat.com/faq/' },
+    ]),
+    getFAQSchema(FREQUENTLY_ASKED_QUESTIONS),
+  ];
 
   return (
     <div className="space-y-10 max-w-4xl mx-auto">
@@ -50,8 +46,9 @@ export const FAQPage: React.FC = () => {
           'cpct typing marks',
           'ssc chsl typing rules',
           'hindi typing questions',
+          'wpm vs gross wpm',
         ]}
-        schemaJson={schemaJson}
+        schemaJson={faqSchemas}
       />
 
       <Breadcrumbs items={[{ name: 'Frequently Asked Questions' }]} />

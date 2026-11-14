@@ -9,6 +9,7 @@ import { ExamGuideCard } from '../components/exam/ExamGuideCard';
 import { ENGLISH_PASSAGES } from '../data/passages/english';
 import { HINDI_PASSAGES } from '../data/passages/hindi';
 import { ExamType } from '../types/typing';
+import { getSoftwareApplicationSchema, getBreadcrumbSchema } from '../utils/seoSchemas';
 
 export const GovernmentExamsPage: React.FC = () => {
   const [selectedExamId, setSelectedExamId] = useState<string>('ssc-chsl');
@@ -21,6 +22,18 @@ export const GovernmentExamsPage: React.FC = () => {
   const handleNextPassage = () => {
     setPassageIndex((prev) => (prev + 1) % passages.length);
   };
+
+  const govtSchemas = [
+    getSoftwareApplicationSchema(
+      'TypeBharat Government Typing Exam Simulator Directory',
+      'Accurate practice simulations for SSC CHSL, SSC CGL DEST, MP CPCT, Railway RRB NTPC, and High Court typist exams.',
+      'https://typebharat.com/government-typing-test/'
+    ),
+    getBreadcrumbSchema([
+      { name: 'Home', url: 'https://typebharat.com/' },
+      { name: 'Government Typing Test Directory', url: 'https://typebharat.com/government-typing-test/' },
+    ]),
+  ];
 
   return (
     <div className="space-y-10">
@@ -35,7 +48,9 @@ export const GovernmentExamsPage: React.FC = () => {
           'railway typing test',
           'court typist exam practice',
           'govt typing exam pattern',
+          'sarkari typing test online',
         ]}
+        schemaJson={govtSchemas}
       />
 
       <Breadcrumbs items={[{ name: 'Government Typing Preparation' }]} />

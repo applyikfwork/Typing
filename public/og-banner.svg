@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <!-- Background with subtle modern mesh styling -->
+  <rect width="1200" height="630" fill="#FAFAF7"/>
+  <rect x="0" y="0" width="1200" height="12" fill="#159E8C"/>
+
+  <!-- Subtle grid pattern -->
+  <g opacity="0.04" stroke="#172B36" stroke-width="1">
+    <line x1="0" y1="100" x2="1200" y2="100"/>
+    <line x1="0" y1="200" x2="1200" y2="200"/>
+    <line x1="0" y1="300" x2="1200" y2="300"/>
+    <line x1="0" y1="400" x2="1200" y2="400"/>
+    <line x1="0" y1="500" x2="1200" y2="500"/>
+    <line x1="200" y1="0" x2="200" y2="630"/>
+    <line x1="400" y1="0" x2="400" y2="630"/>
+    <line x1="600" y1="0" x2="600" y2="630"/>
+    <line x1="800" y1="0" x2="800" y2="630"/>
+    <line x1="1000" y1="0" x2="1000" y2="630"/>
+  </g>
+
+  <!-- Brand Pill -->
+  <rect x="80" y="80" width="360" height="42" rx="21" fill="#EAF7F4" stroke="#159E8C" stroke-width="1.5" stroke-opacity="0.3"/>
+  <circle cx="104" cy="101" r="6" fill="#159E8C"/>
+  <text x="122" y="106" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#11796E" letter-spacing="1">PREMIER TYPING &amp; EXAM PLATFORM</text>
+
+  <!-- Main Headline -->
+  <text x="80" y="190" font-family="system-ui, -apple-system, sans-serif" font-size="64" font-weight="900" fill="#172B36" letter-spacing="-1.5">
+    Master Typing Speed
+  </text>
+  <text x="80" y="260" font-family="system-ui, -apple-system, sans-serif" font-size="64" font-weight="900" fill="#159E8C" letter-spacing="-1.5">
+    &amp; Competitive Exams
+  </text>
+
+  <!-- Subtitle -->
+  <text x="80" y="325" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="500" fill="#586772">
+    English &amp; Hindi Unicode Typing Tests • MP CPCT • SSC CHSL • Railway RRB • Courts
+  </text>
+
+  <!-- Metric Badges Strip -->
+  <g transform="translate(80, 380)">
+    <!-- Card 1: Standard WPM -->
+    <rect x="0" y="0" width="220" height="120" rx="20" fill="#FFFFFF" stroke="#E8ECEB" stroke-width="1.5" filter="drop-shadow(0px 8px 16px rgba(23,43,54,0.06))"/>
+    <text x="24" y="42" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#8A99A4" letter-spacing="1">STANDARD WPM</text>
+    <text x="24" y="90" font-family="monospace, Courier" font-size="44" font-weight="900" fill="#159E8C">65+</text>
+    <text x="100" y="88" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#11796E">Gross &amp; Net</text>
+
+    <!-- Card 2: Hindi Unicode -->
+    <rect x="245" y="0" width="220" height="120" rx="20" fill="#FFFFFF" stroke="#E8ECEB" stroke-width="1.5" filter="drop-shadow(0px 8px 16px rgba(23,43,54,0.06))"/>
+    <text x="269" y="42" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#8A99A4" letter-spacing="1">HINDI UNICODE</text>
+    <text x="269" y="90" font-family="system-ui, sans-serif" font-size="34" font-weight="900" fill="#172B36">देवनागरी</text>
+    <text x="390" y="88" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#586772">Inscript</text>
+
+    <!-- Card 3: 100% Free -->
+    <rect x="490" y="0" width="220" height="120" rx="20" fill="#FFFFFF" stroke="#E8ECEB" stroke-width="1.5" filter="drop-shadow(0px 8px 16px rgba(23,43,54,0.06))"/>
+    <text x="514" y="42" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#8A99A4" letter-spacing="1">PRIVACY FIRST</text>
+    <text x="514" y="90" font-family="system-ui, sans-serif" font-size="40" font-weight="900" fill="#23865B">100%</text>
+    <text x="614" y="88" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#586772">Free &bull; No Login</text>
+  </g>
+
+  <!-- Illustration Box / Decorative Keyboard Graphic on Right -->
+  <g transform="translate(840, 140)">
+    <rect width="280" height="360" rx="24" fill="#FFFFFF" stroke="#E8ECEB" stroke-width="2" filter="drop-shadow(0px 16px 32px rgba(21,158,140,0.12))"/>
+    <rect x="20" y="24" width="240" height="48" rx="12" fill="#EAF7F4"/>
+    <circle cx="48" cy="48" r="14" fill="#159E8C"/>
+    <text x="44" y="53" font-family="system-ui, sans-serif" font-size="14" font-weight="900" fill="#FFFFFF">✓</text>
+    <text x="74" y="53" font-family="system-ui, sans-serif" font-size="15" font-weight="800" fill="#11796E">SSC &amp; CPCT Verified</text>
+
+    <!-- Mini Keyboard simulation keys -->
+    <g transform="translate(20, 96)">
+      <rect x="0" y="0" width="34" height="34" rx="8" fill="#F3F5F4" stroke="#E8ECEB"/>
+      <rect x="42" y="0" width="34" height="34" rx="8" fill="#F3F5F4" stroke="#E8ECEB"/>
+      <rect x="84" y="0" width="34" height="34" rx="8" fill="#159E8C"/>
+      <rect x="126" y="0" width="34" height="34" rx="8" fill="#F3F5F4" stroke="#E8ECEB"/>
+      <rect x="168" y="0" width="34" height="34" rx="8" fill="#F3F5F4" stroke="#E8ECEB"/>
+      <rect x="210" y="0" width="30" height="34" rx="8" fill="#F3F5F4" stroke="#E8ECEB"/>
+
+      <rect x="0" y="44" width="46" height="34" rx="8" fill="#F3F5F4" stroke="#E8ECEB"/>
+      <rect x="54" y="44" width="34" height="34" rx="8" fill="#EAF7F4" stroke="#159E8C"/>
+      <rect x="96" y="44" width="34" height="34" rx="8" fill="#EAF7F4" stroke="#159E8C"/>
+      <rect x="138" y="44" width="34" height="34" rx="8" fill="#F3F5F4" stroke="#E8ECEB"/>
+      <rect x="180" y="44" width="60" height="34" rx="8" fill="#172B36"/>
+
+      <rect x="0" y="88" width="58" height="34" rx="8" fill="#F3F5F4" stroke="#E8ECEB"/>
+      <rect x="66" y="88" width="34" height="34" rx="8" fill="#F3F5F4" stroke="#E8ECEB"/>
+      <rect x="108" y="88" width="34" height="34" rx="8" fill="#F3F5F4" stroke="#E8ECEB"/>
+      <rect x="150" y="88" width="34" height="34" rx="8" fill="#F3F5F4" stroke="#E8ECEB"/>
+      <rect x="192" y="88" width="48" height="34" rx="8" fill="#F3F5F4" stroke="#E8ECEB"/>
+
+      <!-- Spacebar -->
+      <rect x="42" y="132" width="156" height="34" rx="8" fill="#159E8C"/>
+    </g>
+
+    <!-- Footer inside Card -->
+    <rect x="20" y="290" width="240" height="46" rx="12" fill="#FAFAF7" stroke="#E8ECEB"/>
+    <text x="44" y="318" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#172B36">typebharat.com</text>
+    <circle cx="230" cy="313" r="5" fill="#23865B"/>
+  </g>
+
+  <!-- Bottom Brand Signature -->
+  <text x="80" y="555" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700" fill="#8A99A4">
+    Type<tspan fill="#159E8C">Bharat</tspan> &bull; Built for India &bull; Free &bull; Open Access
+  </text>
+</svg>
